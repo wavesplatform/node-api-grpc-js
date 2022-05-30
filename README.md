@@ -1,5 +1,7 @@
 # About
 
+[![npm version](https://img.shields.io/npm/v/@waves/node-api-grpc.svg?style=flat)](https://www.npmjs.com/package/@waves/node-api-grpc)
+
 A client for Waves Node gRPC and Blockchain Updates.
 
 # How to use
@@ -13,9 +15,11 @@ We use:
 
 ## Examples
 
-1. `npm install --save @waves/node-api-js bs58`
+1. `npm install --save @waves/node-api-grpc bs58`
+
    `bs58` here for encoding and decoding addresses and ids.
-2. A default usage with TypeScript looks like:
+
+2. default usage with TypeScript looks like:
     ```typescript
     import * as w from '@waves/node-api-grpc'
     import b58 from 'bs58'
