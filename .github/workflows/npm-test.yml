@@ -1,0 +1,24 @@
+name: Testing
+
+on:
+  push:
+    branches:
+      - master
+      - version-[0-9].[0-9]+.x
+    tags:
+      - v[0-9].[0-9]+.[0-9]+
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 14
+      - run: |
+          exec bash # For shopt, see package.json: scripts.protoLoaderGenTypes
+          npm ci
+          npm run build
+          npm test
