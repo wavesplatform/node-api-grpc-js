@@ -4,7 +4,7 @@ A client for Waves Node gRPC and Blockchain Updates.
 
 # How to use
 
-Npm package: `waves-grpc`.
+Npm package: `@waves/node-api-grpc`.
 
 We use:
 * `@grpc/proto-loader` to load proto-files and the embedded app `proto-loader-gen-types` to generate definitions;
@@ -13,11 +13,11 @@ We use:
 
 ## Examples
 
-1. `npm install --save @wavesplatform/protobuf-schemas bs58`
+1. `npm install --save @waves/node-api-js bs58`
    `bs58` here for encoding and decoding addresses and ids.
 2. A default usage with TypeScript looks like:
     ```typescript
-    import * as w from 'waves-grpc'
+    import * as w from '@waves/node-api-grpc'
     import b58 from 'bs58'
     
     const grpcChannel = w.grpc.mkDefaultChannel('grpc.wavesnodes.com:6870')
@@ -62,7 +62,7 @@ We use:
     
     With JavaScript looks similar:
     ```javascript
-    const w = require('waves-grpc');
+    const w = require('@waves/node-api-grpc');
     const b58 = require('bs58');
     
     const channel = w.grpc.mkDefaultChannel('grpc.wavesnodes.com:6870')
@@ -99,3 +99,9 @@ If you want to create a client of API that isn't listed in the example, you need
    ```
    Then you need to register an event handler for "data" event (see the "Streaming" example)
    b. Otherwise, you need to provide only a callback (see the "One-shot" example)
+
+# How to build and test locally
+
+```shell
+$ npm run build && npm test
+```

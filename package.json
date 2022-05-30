@@ -1,5 +1,5 @@
 {
-  "name": "waves-grpc",
+  "name": "@waves/node-api-grpc",
   "version": "0.0.1",
   "description": "A client for Waves Node gRPC and Blockchain Updates",
   "main": "dist/index.js",
@@ -36,12 +36,12 @@
   ],
   "author": "Vyacheslav Suharnikov",
   "license": "MIT",
-  "homepage": "https://github.com/vsuharnikov/waves-grpc#readme",
+  "homepage": "https://github.com/wavesplatform/node-api-grpc-js#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/vsuharnikov/waves-grpc.git"
+    "url": "git+https://github.com/wavesplatform/node-api-grpc-js.git"
   },
   "bugs": {
-    "url": "https://github.com/vsuharnikov/waves-grpc/issues"
+    "url": "https://github.com/wavesplatform/node-api-grpc-js/issues"
   }
 }

@@ -21,7 +21,7 @@ export function protoFilesInSubDir(dir: string) {
 }
 
 export function wavesProtoFiles() {
-    return [...protoFilesInSubDir(path.resolve(__dirname, 'node_modules/@waves/protobuf-serialization/proto'))];
+    return [...protoFilesInSubDir(path.resolve(__dirname, '../node_modules/@waves/protobuf-serialization/proto'))];
 }
 
 // API definitions
