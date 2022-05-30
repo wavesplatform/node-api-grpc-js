@@ -1,6 +1,6 @@
 {
   "name": "@waves/node-api-grpc",
-  "version": "0.0.1",
+  "version": "0.0.2-beta.1",
   "description": "A client for Waves Node gRPC and Blockchain Updates",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
