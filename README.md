@@ -11,7 +11,7 @@ Npm package: `@waves/node-api-grpc`.
 We use:
 * `@grpc/proto-loader` to load proto-files and the embedded app `proto-loader-gen-types` to generate definitions;
 * `@grpc/grpc-js` to request the data from Waves Node gRPC API;
-* `long.js` to represent 64-bit integers: `int64`, `uint64`, etc.
+* `long` to represent 64-bit integers: `int64`, `uint64`, etc.
 
 ## Examples
 
@@ -109,3 +109,7 @@ If you want to create a client of API that isn't listed in the example, you need
 ```shell
 $ npm run build && npm test
 ```
+
+# Publishing
+
+See https://docs.npmjs.com/updating-your-published-package-version-number
