@@ -62,6 +62,7 @@ export const grpc = {
       // https://github.com/grpc/grpc-node/tree/master/packages/grpc-js#supported-channel-options
       {
         'grpc.enable_channelz': 0, // https://github.com/grpc/grpc-node/issues/1941
+        'grpc.max_receive_message_length': 8 * 1024 * 1024, // Some blocks on MainNet and TestNet are huge
         ...options
       }
     );

@@ -19,7 +19,17 @@ We use:
 
    `bs58` here for encoding and decoding addresses and ids.
 
-2. default usage with TypeScript looks like:
+2. Create a channel:
+    ```typescript
+    import * as w from '@waves/node-api-grpc'
+    const grpcChannel = w.grpc.mkDefaultChannel('grpc.wavesnodes.com:6870', {
+      // Additional options if required. For example:
+      // "grpc.max_receive_message_length": 10 * 1024 * 1024
+    })
+    ```
+    See a full list of options in [@grpc/grpc-js](https://www.npmjs.com/package/@grpc/grpc-js#user-content-supported-channel-options).
+
+3. A typical usage with TypeScript looks like:
     ```typescript
     import * as w from '@waves/node-api-grpc'
     import b58 from 'bs58'

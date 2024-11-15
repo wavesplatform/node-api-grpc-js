@@ -28,46 +28,50 @@ async function getTransactionHeight(channel: Channel, txnId: string) {
   })
 }
 
-async function getBigestBlock(channel: Channel, height: number) {
+async function loadBlocks(channel: Channel, fromHeight: number, toHeight: number) {
+  let n = 0
   return new Promise<number>((resolve, reject) => {
-    const blocksApi = w.api.waves.node.grpc.mkBlocksApi(channel)
+    const blocksApi = w.api.waves.events.grpc.mkBlockchainUpdatesApi(channel)
     blocksApi
-      .getBlock({
-        height: height,
-        includeTransactions: true
-      },
-        (error, response) => {
-          if (error) return reject(error);
-          if (!response) return reject("Block not found");
-
-          resolve(response.height);
-        }
-      )
+      .subscribe({
+        fromHeight: fromHeight,
+        toHeight: toHeight,
+      })
+      .on("data", (item: w.api.waves.events.grpc.SubscribeEvent) => {
+        n += 1
+      })
+      .on("error", (e: Error) => reject(e))
+      .on("end", () => resolve(n))
   })
 }
 
-describe('Waves gRPC API', () => {
-  let channel = w.grpc.mkDefaultChannel('grpc.wavesnodes.com:6870')
+describe('Waves gRPC API', function () {
+  this.timeout(5000)
+
+  let grpcChannel = w.grpc.mkDefaultChannel('grpc.wavesnodes.com:6870')
+  let updatesChannel = w.grpc.mkDefaultChannel('grpc.wavesnodes.com:6881')
 
   // One request
   it('#AccountsApi.resolveAlias - resolves an alias', async () => {
-    let address = await resolveAlias(channel, 'likli')
+    let address = await resolveAlias(grpcChannel, 'likli')
     assert.equal(address, '3PNaua1fMrQm4TArqeTuakmY1u985CgMRk6')
   })
 
   // Stream
   it('#TransactionApi.getTransaction - finds a transaction', async () => {
-    let txnHeight = await getTransactionHeight(channel, '287XcMXPDY7pnw2tECbV86TZetPi2x9JBg9BVUsGaSJx')
+    let txnHeight = await getTransactionHeight(grpcChannel, '287XcMXPDY7pnw2tECbV86TZetPi2x9JBg9BVUsGaSJx')
     assert.equal(txnHeight, 3131305)
   })
 
-  it('#BlocksApi.getBlock - reads the biggest block', async () => {
-    const height = 1
-    const r = await getBigestBlock(channel, height)
-    assert.equal(r, height)
+  it('#BlockchainUpdatesApi.subscribe - load blocks', async () => {
+    const fromHeight = 3371000
+    const toHeight = 3371001
+    const n = await loadBlocks(updatesChannel, fromHeight, toHeight)
+    assert.equal(n, 2)
   })
 
   after(() => {
-    channel.close()
+    updatesChannel.close()
+    grpcChannel.close()
   })
 })
